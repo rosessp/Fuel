@@ -26,7 +26,7 @@ public class Main extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        changeipbuilder= new AlertDialog.Builder(Main.this,R.style.AppTheme);
+        changeipbuilder= new AlertDialog.Builder(Main.this,R.style.DialogipTheme);
         enter_pos=(Button) findViewById(R.id.enter_pos);
         changeipview = getLayoutInflater().inflate(R.layout.changeip, null);
         ip=(EditText) changeipview.findViewById(R.id.edit_text_ip);
@@ -39,7 +39,7 @@ public class Main extends AppCompatActivity {
         enter_pos.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
             {
-                Toast.makeText(getApplicationContext(),ipaddress,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),ipaddress,Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(Main.this,AllActivity.class);
                 Bundle b=new Bundle();
                 if(ipaddress != null){
@@ -55,13 +55,14 @@ public class Main extends AppCompatActivity {
         changeipbuilder.setPositiveButton("Change IP", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 ipaddress = ip.getText().toString();
-                Toast.makeText(getApplicationContext(),ipaddress,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),ipaddress,Toast.LENGTH_SHORT).show();
                 changeipdialog.cancel();
 
             }
         });
         changeipbuilder.setView(changeipview);
         changeipdialog= changeipbuilder.create();
+        changeipdialog.setTitle("Change Ip Address");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
