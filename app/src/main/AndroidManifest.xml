@@ -21,10 +21,12 @@
         android:icon="@mipmap/fuel"
         android:label="Fuel POS"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+
        >
         <activity
-            android:name=".activity.AllActivity">
+            android:name=".activity.AllActivity"
+            android:label="Fuel POS"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
 
         </activity>
 
@@ -40,7 +42,9 @@
                 android:resource="@xml/method" />
         </service>
 
-        <activity android:name=".activity.Main">
+        <activity android:name=".activity.Main"
+            android:label="Fuel POS"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
