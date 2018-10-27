@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.content.Intent;
 import android.provider.UserDictionary;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -54,7 +57,7 @@ public class AllActivity extends AppCompatActivity  {
    public static TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1;
-    public static String vehicle;
+    public static String vehicle,ip_address;
    public static AlertDialog dialog;
     public static AlertDialog dialog1;
     public static AlertDialog dialog3;
@@ -85,8 +88,11 @@ public class AllActivity extends AppCompatActivity  {
     @Override
     public  void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         final long startTime = System.nanoTime();
         setContentView(R.layout.activity_all);
+        Intent i=getIntent();
+         ip_address=i.getStringExtra("ip");
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         WebView webView = (WebView) findViewById(R.id.webview);
 
@@ -199,7 +205,7 @@ Thread th=new Thread()
        // String imei=telephonyManager.getDeviceId();
        // Toast.makeText(getApplicationContext(),"IMEI"+imei,Toast.LENGTH_SHORT).show();
 
-        webView.loadUrl("http://192.168.25.2:8069/web/login");
+        webView.loadUrl(ip_address);
         webAppInterface= new WebAppInterface(webView,AllActivity.this);
         webView.addJavascriptInterface(webAppInterface, "AndroidInterface"); // To call methods in Android from using js in the html, AndroidInterface.showToast, AndroidInterface.getAndroidVersion etc
         WebSettings webSettings = webView.getSettings();
@@ -227,7 +233,7 @@ Thread th=new Thread()
     }
 
 
-//
+    //
 //    private class MyWebViewClient extends WebViewClient {
 //        @Override
 //        public void onPageFinished(WebView view, String url) {
@@ -248,7 +254,7 @@ Thread th=new Thread()
     @Override
     public void onBackPressed(){
         final AlertDialog.Builder builder=new AlertDialog.Builder(AllActivity.this);
-        builder.setMessage("Are you sure want to exit ?");
+        builder.setMessage("Are you sure want to exit POS ?");
         builder.setCancelable(true);
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
